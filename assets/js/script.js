@@ -1,14 +1,9 @@
-console.dir(window.document);
-window.document.querySelector("button");
-var btn = window.document.querySelector("button");
-console.dir(btn);
-document.querySelector(".btn");
-document.querySelector("button").textContent;
-var buttonEl = document.querySelector("#save-task");
-console.log(buttonEl);
-buttonEl.addEventListener("click", function() {
-    alert("button clicked");
-  });
+var startButton = document.getElementById('start-btn')
+var nextButton = document.getElementById('next-btn')
+var questionContainerElement = document.getElementById('question-container')
+var questionElement = document.getElementById('question')
+var answerButtonsElement = document.getElementById('answer-buttons')
+var count = 30;
 var counter = 15
 var countdown =function () {
     console.log(counter);
@@ -18,7 +13,8 @@ var countdown =function () {
     };
 };
   var startCountdown = setInterval(countdown, 15000);
-//questions with choices and answers pulled from "https://www.includehelp.com/mcq/javascript-multiple-choice-questions-mcqs.aspx"
+
+  //questions with choices and answers pulled from "https://www.includehelp.com/mcq/javascript-multiple-choice-questions-mcqs.aspx"
   const questions = [{
 
     question: "Which type of JavaScript language is ___:",
@@ -65,3 +61,25 @@ var countdown =function () {
     
 
   }];
+
+  // start button
+  startButton.addEventListener('click', () => {
+    startGame()
+    startTimer()
+  })
+  nextButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion()
+  })
+  
+  function startTimer() {
+    var interval = setInterval(function() {
+      document.getElementById('time-display').innerHTML=count;
+      count--;
+      if (count < 0){
+        clearInterval(interval);
+        alert("You're out of time!");
+      }
+    },1000);
+  }
+  
